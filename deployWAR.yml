@@ -2,6 +2,13 @@
 - name: deploy  webserver
   hosts: webserver
   tasks:
+
+  - name: Git checkout
+    ansible.builtin.git:
+      repo: 'https://github.com/Jaiborge/HelloSimplLearn.git'
+      dest: /var/lib/jenkins/workspace/
+      version: release-0.1        
+          
   - name: maven clean package
     command: mvn -f  /var/lib/jenkins/workspace/HelloSimplLearn/pom.xml
   

@@ -1,6 +1,7 @@
 ---
 - name: deploy  webserver
   hosts: webserver
+  remote_user: devops
   tasks:
 
   - name: Git checkout

@@ -1,0 +1,15 @@
+- name: compile package
+  hosts: localhost
+  connection: local
+
+  tasks:
+
+  - name: Git checkout
+    git:
+      repo: 'https://github.com/Jaiborge/HelloSimplLearn.git'
+      dest: /var/lib/jenkins/workspace/HelloSimplLearn
+      clone: yes
+      update: yes
+
+  - name: maven clean package
+    command: mvn clean package -f /var/lib/jenkins/workspace/HelloSimplLearn/pom.xml

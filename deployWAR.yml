@@ -1,6 +1,7 @@
-- webserver: uploads
+---
+- name: deploy  webserver
+  hosts: webserver
   tasks:
-
-    - name: maven clean package
-      command: mvn -f  /var/lib/jenkins/workspace/HelloSimplLearn/pom.xml
+  - name: maven clean package
+    command: mvn -f  /var/lib/jenkins/workspace/HelloSimplLearn/pom.xml
   

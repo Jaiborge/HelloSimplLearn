@@ -5,11 +5,12 @@
   tasks:
 
   - name: Git checkout
-    ansible.builtin.git:
+    git:
       repo: 'https://github.com/Jaiborge/HelloSimplLearn.git'
-      dest: /var/lib/jenkins/workspace/
-      version: release-0.1        
+      dest: /var/lib/jenkins/workspace/HelloSimplLearn
+      clone: yes
+      update: yes      
           
   - name: maven clean package
-    command: mvn -f  /var/lib/jenkins/workspace/HelloSimplLearn/pom.xml
+    command: mvn clean package
   

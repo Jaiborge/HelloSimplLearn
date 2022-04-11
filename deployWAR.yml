@@ -1,0 +1,6 @@
+- webserver: uploads
+  tasks:
+
+    - name: maven clean package
+      command: mvn -f  /var/lib/jenkins/workspace/HelloSimplLearn/pom.xml
+  

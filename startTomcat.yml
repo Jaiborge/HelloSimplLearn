@@ -1,19 +1,11 @@
----
 - name: deploy  webserver
   hosts: webserver
   tasks:
    - debug: msg="Running Tomcat via Ansible"
 
-- name: Start application
-  shell: "/home/jeljo/tomcat8A/bin/startup.sh"
-  args:
-  chdir: "/tmp"
-  executable: "/bin/bash"
+   - name: Start tomcat
+     become: yes
+     become_user: devops
+     shell: nohup /opt/tomcat/bin/startup.sh
+
   
-- name: Start Tomcat
-  command: "nohup /home/jeljo/tomcat8A/bin/startup.sh"
-  tags: starttom
-  
-- name: Stop Tomcat
-  command: "nohup /home/jeljo/tomcat8A/bin/shutdown.sh"
-  tags: stoptom

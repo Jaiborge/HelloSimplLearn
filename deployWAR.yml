@@ -1,29 +1,18 @@
----
 - name: deploy  webserver
   hosts: webserver
   tasks:
    - debug: msg="Running Tomcat via Ansible"
 
-- name: Stop Tomcat
-  command: "nohup /opt/tomcat/bin/shutdown.sh"
-  tags: stoptom
-  
-- name: copying file with playbook
-  become: true 
-  copy:
-    src: /var/lib/jenkins/workspace/HelloSimplLearn/target/HelloSimplLearn-0.0.1-SNAPSHOT.war
-    dest: /opt/tomcat/webapps/
-    owner: devops
-    group: devops        
-    mode: 0644
-  
-- name: Start application
-  shell: "/opt/tomcat/bin/startup.sh"
-  args:
-  chdir: "/tmp"
-  executable: "/bin/bash"
-  
-- name: Start Tomcat
-  command: "nohup /opt/tomcat/bin/startup.sh"
-  tags: starttom
-  
+   - name: Stop tomcat
+     become: yes
+     become_user: devops
+     shell: nohup /opt/tomcat/bin/shutdown.sh
+
+   - name: copying file with playbook
+     become: true
+     copy:
+       src: /var/lib/jenkins/workspace/HelloSimplLearn/target/HelloSimplLearn-0.0.1-SNAPSHOT.war
+       dest: /opt/tomcat/webapps/
+       owner: devops
+       group: devops
+       mode: 0644

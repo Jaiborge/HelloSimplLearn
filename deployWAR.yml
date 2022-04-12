@@ -1,12 +1,16 @@
 - name: deploy  webserver
+  become: yes
   hosts: webserver
   tasks:
    - debug: msg="Running Tomcat via Ansible"
 
+   - group: name=sudo state=present
+   
    - name: Stop tomcat
      become: yes
      become_user: devops
      shell: nohup /opt/tomcat/bin/shutdown.sh
+     become_method: "sudo"
 
    - name: copying file with playbook
      become: true
